@@ -1,57 +1,57 @@
-import { useCallback, useState } from 'react'
-import { v4 as uuid } from 'uuid'
-import { createContext } from 'use-context-selector'
+import { useCallback, useState } from "react";
+import { v4 as uuid } from "uuid";
+import { createContext } from "use-context-selector";
 
 type Message = {
   id: string;
   author: string;
   text: string;
-}
+};
 
 type User = {
   id: string;
   name: string;
-}
+};
 
 type ChatContextType = {
-  messages: Message[]
-  connected: User[]
-  onNewMessage: (message: Omit<Message, 'id'>) => void
-  onUserConnected: (name: string) => void
-}
+  messages: Message[];
+  connected: User[];
+  onNewMessage: (message: Omit<Message, "id">) => void;
+  onUserConnected: (name: string) => void;
+};
 
-export const ChatContext = createContext({} as ChatContextType)
+export const ChatContext = createContext({} as ChatContextType);
 
 export function ChatProvider({ children }) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [connected, setConnected] = useState<User[]>([])
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [connected, setConnected] = useState<User[]>([]);
 
-  const onNewMessage = useCallback(({ author, text }: Omit<Message, 'id'>) => {
-    const id = uuid()
+  const onNewMessage = useCallback(({ author, text }: Omit<Message, "id">) => {
+    const id = uuid();
 
     const message = {
       id,
       author,
-      text
-    }
+      text,
+    };
 
-    setMessages(state => [...state, message]);
+    setMessages((state) => [...state, message]);
   }, []);
 
   const onUserConnected = useCallback((name: string) => {
-    const id = uuid()
+    const id = uuid();
 
     const user = {
       id,
-      name
-    }
+      name,
+    };
 
-    setConnected(state => [...state, user])
+    setConnected((state) => [...state, user]);
   }, []);
 
   return (
-    <ChatContext.Provider 
-      value={{ 
+    <ChatContext.Provider
+      value={{
         messages,
         connected,
         onNewMessage,
@@ -60,5 +60,5 @@ export function ChatProvider({ children }) {
     >
       {children}
     </ChatContext.Provider>
-  )
+  );
 }

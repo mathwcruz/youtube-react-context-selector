@@ -1,17 +1,17 @@
-import faker from "faker"
-import { FormEvent } from "react"
-import { useChatMessages } from "../hooks/useChatMessages"
+import faker from "faker";
+import { FormEvent } from "react";
+import { useChatMessages } from "../hooks/useChatMessages";
 
 export function Chat() {
-  const { messages, onNewMessage } = useChatMessages()
+  const { messages, onNewMessage } = useChatMessages();
 
   function handleSendMessage(event: FormEvent) {
-    event.preventDefault()
+    event.preventDefault();
 
     onNewMessage({
-      author: 'Diego Fernandes',
+      author: "Diego Fernandes",
       text: faker.lorem.paragraph(),
-    }) 
+    });
   }
 
   return (
@@ -44,22 +44,22 @@ export function Chat() {
             </ul>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-6 sm:px-6">
+        <div className="px-4 py-6 bg-gray-50 sm:px-6">
           <div className="flex space-x-3">
-            <div className="min-w-0 flex-1">
+            <div className="flex-1 min-w-0">
               <form action="#" onSubmit={handleSendMessage}>
                 <textarea
                   id="comment"
                   name="comment"
                   rows={3}
-                  className="shadow-sm block p-4 w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
+                  className="block w-full p-4 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="Leave a message"
-                  defaultValue={''}
+                  defaultValue={""}
                 />
-                <div className="mt-3 flex justify-end">
+                <div className="flex justify-end mt-3">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
                     Send message
                   </button>
@@ -70,5 +70,5 @@ export function Chat() {
         </div>
       </div>
     </section>
-  )
+  );
 }
